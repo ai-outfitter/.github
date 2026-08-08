@@ -30,8 +30,9 @@ Key terms to understand:
 - **profile** — one agent's full definition — context, tools, skills,
   permissions — as plain files.
 - **catalog** — a shared, version-pinned collection of profiles and skills.
-- **the record** — the write-once store of what agents actually did:
-  transcripts, tool calls, diffs, approvals.
+- **the record** — the accumulated, write-once evidence of what agents
+  actually did: transcripts, tool calls, diffs, approvals — captured per
+  action, stored in [pensieve](https://github.com/ai-outfitter/pensieve).
 
 ## Why we built AI Outfitter
 
