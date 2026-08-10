@@ -1,10 +1,9 @@
 # AI Outfitter
 
-Open, vendor-neutral tooling for controlling agents: ramp a user, a team, or an
-organization from AI-assisted coding to a fully autonomous software
+Open, vendor-neutral tooling for controlling agents: ramp a user, a team,
+or an organization from AI-assisted coding to an autonomous software
 development lifecycle.
 
-AI Outfitter is a complete system for managing agentic development.
 Everything here builds on one convention: an agent's context, tools, skills,
 and permissions are plain files in a `.agents/` directory — committed,
 reviewed, and shared like the rest of your code. The same definition runs
@@ -13,22 +12,21 @@ a cluster) and with any model vendor, including self-hosted models. The
 core is open source under MIT — free to adopt, free to fork, free to build
 a business on.
 
-As you adopt AI Outfitter, we strongly suggest following these two
-guidelines:
+Two rules govern the whole climb:
 
 1. **Automate nothing you have not first done manually.**
 2. **Hand over control one layer at a time.**
 
-Follow these two guidelines and adopting agents stops being a leap of faith. You
-never skip a step you don't understand, and nothing you build on one rung is
-thrown away on the next.
+Follow them and adopting agents stops being a leap of faith. You never skip
+a step you don't understand, and nothing you build on one rung is thrown
+away on the next.
 
-Key terms to understand:
+Terms:
 
 - **harness** — the CLI tool that runs an agent: Claude Code, Pi, Codex.
 - **forge** — where code and issues live: GitHub, GitLab.
-- **profile** — one agent's full definition — context, tools, skills,
-  permissions — as plain files.
+- **profile** — one agent's full definition (context, tools, skills,
+  permissions) as plain files.
 - **catalog** — a shared, version-pinned collection of profiles and skills.
 - **the record** — the accumulated, write-once evidence of what agents
   actually did: transcripts, tool calls, diffs, approvals — captured per
@@ -50,9 +48,7 @@ None of that means your organization is behind. It means you are partway up a
 ramp that most software organizations are climbing right now, and the next
 rung is hard to see from where you stand.
 
-We built AI Outfitter to help you climb the ramp faster. AI Outfitter is a
-clear foundation and open set of primitives for managing agentic
-engineering processes and AI SDLC.
+We built AI Outfitter to help you climb the ramp faster.
 
 ## The ramp
 
@@ -78,14 +74,19 @@ got you here — and without adopting complexity too early.
    step-by-step quality gates so the agent checks its own work.
 
 3. **Automated** — a workflow runs without your laptop: an issue, a message,
-   or a schedule triggers agents in CI or a cluster; adversarial review is
-   part of the pipeline; session logs are captured before merge. *You are
-   here when* you close your laptop and the work keeps going.
+   or a schedule triggers agents in CI, on a cluster, or on a remote server
+   you never sit at; adversarial review is part of the pipeline; session
+   logs are captured before merge. *You are here when* you close your laptop
+   and the work keeps going. What promotes you is the trigger, not the
+   hardware: an agent you drive over SSH is rung 2 on a bigger machine.
    [actions](https://github.com/ai-outfitter/actions) runs any profile
-   headless — no human at the keyboard — in GitHub Actions, on any trigger;
+   headless in GitHub Actions, on any trigger;
    [channels](https://github.com/ai-outfitter/channels) pushes email, Slack,
-   and forge events (GitHub or GitLab activity) into an agent session, so
-   one message can start the same workflow.
+   Signal, and forge events (GitHub or GitLab activity) into an agent
+   session, so one message can start the same workflow; and
+   [agent-operator](https://github.com/ai-outfitter/agent-operator) can host
+   the same profiles on your own infrastructure, well before you need its
+   resident-agent story on the next rung.
 
 4. **Governed** — the organization shares one version-pinned catalog of
    agents, skills, and policy; every agent action lands in an auditable
@@ -98,11 +99,10 @@ got you here — and without adopting complexity too early.
    [agent-operator](https://github.com/ai-outfitter/agent-operator)
    provisions and supervises resident agents on your own infrastructure; and
    [pensieve](https://github.com/ai-outfitter/pensieve) is the write-once
-   evidence store the audit story lands in. The record is an immutable log
-   of every action taken — bound to environments, agents, tools, sessions,
-   artifacts, costs, and more. That log is what lets you audit your
-   processes, prove compliance, and run automated, recursive
-   self-improvement on them.
+   evidence store the audit story lands in: an immutable log of every action
+   taken, bound to environments, agents, tools, sessions, artifacts, and
+   costs. That log is what lets you audit your processes, prove compliance,
+   and run automated, recursive self-improvement on them.
 
 5. **Self-improving** — the audit record feeds evals and improvement; humans
    set goals and acceptance gates, agents own the middle.
@@ -110,8 +110,8 @@ got you here — and without adopting complexity too early.
    profile, model, or workflow made things better, with reproducible,
    attested benchmarks;
    [autoimprove](https://github.com/ai-outfitter/autoimprove) trains
-   portable skills against real outcomes. The youngest components in the
-   org, matching the rung they serve.
+   portable skills against real outcomes. Rung 5 is where the stack is
+   thinnest today.
 
 ## Start with one workflow, end to end
 
@@ -139,7 +139,7 @@ This is what rung 3 looks like up close.
    tool calls, and diffs captured as artifacts before the environment that
    produced them is torn down.
 
-The same shape handles other great starting workflows. A vulnerability
+The same shape handles other starting workflows. A vulnerability
 report instead of a feature idea turns the pipeline into governed security
 remediation: the scanner files the issue (most scanners already can), the
 planner scopes the fix, and the same steps carry it to a tested, approved
@@ -154,8 +154,8 @@ in their own `~/.agents` against real work; the team mines
 [pensieve](https://github.com/ai-outfitter/pensieve) for the patterns
 behind successful and failing runs. When a change earns trust it moves by
 pull request into the org catalog, where every agent composes it by name.
-One person's improvement becomes everyone's default without anyone else
-reconfiguring anything.
+One person's improvement becomes everyone's default at the next pin bump —
+no one else reconfigures anything.
 
 ## Why plain files
 
@@ -180,7 +180,7 @@ is an open standard for doing the same for agents:
   commands/            # slash commands
 ```
 
-Markdown and JSON. Readable in an afternoon, reviewable in a pull request,
+Markdown and JSON. Readable in a sitting, reviewable in a pull request,
 diffable in an audit. Layers merge by name — a project's `.agents/` over an
 engineer's `~/.agents/` over the organization's pinned catalog — so
 individuals keep their preferences and organizations keep their policy
@@ -193,9 +193,8 @@ harness: Pi has the deepest runtime support today, with Claude Code tracked
 component by component in the
 [support matrix](https://github.com/ai-outfitter/outfitter/blob/main/docs/documentation/support-matrix.md)
 — a Claude Code team starts on Claude Code, and the matrix shows the gaps
-before you hit them.
-And if you drop Outfitter itself, the catalog you built is still yours —
-plain files, still working.
+before you hit them. And if you drop Outfitter itself, the catalog you
+built is still yours — plain files, still working.
 
 ## Start this afternoon
 
@@ -211,7 +210,7 @@ read-only forge token. It reads through the API — never clones, never
 writes — and produces two local files you review before anyone else sees
 them. We ran it on this organization the day we wrote this page; the output
 is committed at
-[.agents/reports](https://github.com/ai-outfitter/.agents/tree/main/reports/sdlc),
+[.agents/reports/sdlc](https://github.com/ai-outfitter/.agents/tree/main/reports/sdlc),
 so you can see exactly what you would get.
 
 **2. Try the toolchain — ten minutes.**
@@ -230,7 +229,7 @@ in a working agent session, and everything it created is plain files under
 one repository, and promote the profiles you already trust at a desk into
 [CI](https://github.com/ai-outfitter/actions). The
 [getting started guide](https://github.com/ai-outfitter/outfitter/blob/main/docs/documentation/getting-started.md)
-and the [use cases](https://github.com/ai-outfitter/outfitter/blob/main/docs/documentation/README.md)
+and the [use cases](https://github.com/ai-outfitter/outfitter/tree/main/docs/documentation/usecases)
 cover the path.
 
 ## The repositories
@@ -281,15 +280,14 @@ This stack is built with the leverage it sells, and it shows in the commit
 dates: v1.5.0 followed v1.4.0 by three days, and the evidence store went
 from an empty repository to a public specification to its first working
 collectors in under 48 hours. Actions and the catalogs carry this org's own
-real workloads. Read the status tags above against that tempo — the unit is
-days to weeks, not quarters.
+real workloads. Read the rung and status tags above against that tempo —
+the unit is days to weeks, not quarters.
 
 The model is open core: the convention, the toolchain, and the defaults are
 MIT — modules you can rip out and replace — while some advanced capabilities
-ship under an enterprise license.
-If you are evaluating this for an organization, start
-with the
-[SDLC report](https://github.com/ai-outfitter/outfitter/blob/main/docs/documentation/usecases/org-onboarding-sdlc-report.md),
+ship under an enterprise license. If you are evaluating this for an
+organization, start with the
+[org-onboarding runbook](https://github.com/ai-outfitter/outfitter/blob/main/docs/documentation/usecases/org-onboarding-sdlc-report.md),
 then [open an issue](https://github.com/ai-outfitter/outfitter/issues) with
 what you found. The gaps you hit are the roadmap we want.
 
