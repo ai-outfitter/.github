@@ -74,11 +74,9 @@ success check you run rather than judge.
    shared policy — and proof of what every agent did.
    - **Runbook: [Give the agent a residence](https://github.com/ai-outfitter/outfitter/blob/main/docs/runbooks/give-the-agent-a-residence.md)**
      — a named, assignable agent with an account and somewhere to live.
-   - **Build your catalog: [Organization catalog](https://github.com/ai-outfitter/outfitter/blob/main/docs/documentation/usecases/organization-profile-catalog.md)**
-     — the operating context every agent inherits, role agents, and the
-     governance that makes a version pin a policy decision.
-     [Catalogs](https://github.com/ai-outfitter/outfitter/blob/main/docs/documentation/catalogs.md)
-     is the reference for layouts, pinning, and sync; our own
+   - **Build your catalog: [Share one catalog](https://github.com/ai-outfitter/outfitter/blob/main/docs/runbooks/share-one-catalog.md)**
+     — the rung 2 runbook creates it and links on to the layout, pinning,
+     and governance references. Our own
      [.agents](https://github.com/ai-outfitter/.agents) is a worked example
      you can read end to end.
    - [agent-operator](https://github.com/ai-outfitter/agent-operator) —
