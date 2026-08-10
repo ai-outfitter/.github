@@ -181,6 +181,11 @@ one repository, and promote the profiles you already trust at a desk into
 then [give the agent a residence](https://github.com/ai-outfitter/outfitter/blob/main/docs/runbooks/give-the-agent-a-residence.md).
 Each ends with the one concrete step that starts the next.
 
+You do not have to judge whether the first slice worked. Every runbook closes
+with a **Done when** section naming the signals the report above checks —
+for this one, `triggered-agents`, `protected-landing`, and `session-capture`.
+Re-run the report and it names whichever is still unmet.
+
 ## The repositories
 
 Everything composes with **[outfitter](https://github.com/ai-outfitter/outfitter)**,
