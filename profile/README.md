@@ -200,7 +200,7 @@ Pi extension packages:
 [file-talk](https://github.com/ai-outfitter/file-talk),
 [bash-saver](https://github.com/ai-outfitter/bash-saver).
 
-## Why plain files
+## Agent configuration as code
 
 Your agent setup is already configuration: system prompts, skills, MCP
 servers, model choices, permissions. Today that configuration lives per tool
