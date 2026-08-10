@@ -74,8 +74,8 @@ baseline, a team convention, a project role, switched as the work changes.
 That keeps each profile tight, and tight profiles preserve the context
 headroom that turns into faster, better sessions.
 
-It is also the exit door. The directory is the source of truth and is useful
-without Outfitter. Vendor-neutral cuts in every direction — models,
+The directory is also the exit door. It is the source of truth, and it is
+useful without Outfitter. Vendor-neutral cuts in every direction — models,
 **harnesses** (the CLI that runs an agent: Claude Code, Pi, Codex), and us.
 Swap model vendors freely. Run the catalog through any harness: Pi has the
 deepest runtime support today, with Claude Code tracked component by
@@ -255,8 +255,8 @@ This stack is built with the leverage it sells, and it shows in the commit
 dates: v1.5.0 followed v1.4.0 by three days, and the evidence store went
 from an empty repository to a public specification to its first working
 collectors in under 48 hours. Actions and the catalogs carry this org's own
-real workloads. Read the rung and status columns above against that tempo —
-the unit is days to weeks, not quarters.
+real workloads. Read the rung column and the status notes beside it against
+that tempo — the unit is days to weeks, not quarters.
 
 The model is open core: the convention, the toolchain, and the defaults are
 MIT — modules you can rip out and replace — while some advanced capabilities
