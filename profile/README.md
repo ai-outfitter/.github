@@ -24,7 +24,9 @@ stand.
 Five rungs, from AI-assisted coding to an autonomous lifecycle
 ([full definition](https://github.com/ai-outfitter/outfitter/blob/main/docs/philosophy.md)).
 Each Outfitter component targets a rung, so you climb without rebuilding what
-got you here — and without adopting complexity too early.
+got you here — and without adopting complexity too early. Rungs 2, 3, and 4
+each open with the **runbook** that gets you there: the concrete steps, and a
+success check you run rather than judge.
 
 1. **Assisted** — autocomplete and chat; a human's hands stay on the
    keyboard. *You are here if* you use autocomplete in an IDE.
@@ -36,6 +38,9 @@ got you here — and without adopting complexity too early.
    review the PR. *You are here if* engineers run a coding agent in a
    terminal and push the result. This is where configuration starts to
    matter.
+   - **Runbook: [Share one catalog](https://github.com/ai-outfitter/outfitter/blob/main/docs/runbooks/share-one-catalog.md)**
+     — one pinned catalog the organization shares, instead of per-laptop
+     configuration.
    - [outfitter](https://github.com/ai-outfitter/outfitter) — composes what
      an agent knows and may do into a **profile**: plain files in your
      `.agents/` folder, reviewed like code and portable across environments
@@ -49,6 +54,9 @@ got you here — and without adopting complexity too early.
    logs are captured before merge. *You are here when* you close your laptop
    and the work keeps going. What promotes you is the trigger, not the
    hardware: an agent you drive over SSH is rung 2 on a bigger machine.
+   - **Runbook: [Run it without your laptop](https://github.com/ai-outfitter/outfitter/blob/main/docs/runbooks/run-without-your-laptop.md)**
+     — an event triggers the workflow, its output lands through review, and
+     the session is captured.
    - [actions](https://github.com/ai-outfitter/actions) — runs any profile
      headless in GitHub Actions, on any trigger.
    - [channels](https://github.com/ai-outfitter/channels) — pushes email,
@@ -64,6 +72,8 @@ got you here — and without adopting complexity too early.
    with their own accounts and boundaries — take on standing jobs. *You are
    here when* agents work across many teams, and the organization needs
    shared policy — and proof of what every agent did.
+   - **Runbook: [Give the agent a residence](https://github.com/ai-outfitter/outfitter/blob/main/docs/runbooks/give-the-agent-a-residence.md)**
+     — a named, assignable agent with an account and somewhere to live.
    - [.agents](https://github.com/ai-outfitter/.agents) — the org's own
      repository: the pattern for that shared catalog.
    - [agent-operator](https://github.com/ai-outfitter/agent-operator) —
@@ -157,10 +167,11 @@ in a working agent session, and everything it created is plain files under
 
 **3. Automate one workflow.** Pick feature-to-PR or bug-to-PR, keep it to
 one repository, and promote the profiles you already trust at a desk into
-[CI](https://github.com/ai-outfitter/actions). The
-[getting started guide](https://github.com/ai-outfitter/outfitter/blob/main/docs/documentation/getting-started.md)
-and the [use cases](https://github.com/ai-outfitter/outfitter/tree/main/docs/documentation/usecases)
-cover the path.
+[CI](https://github.com/ai-outfitter/actions). Work the runbooks in order —
+[share one catalog](https://github.com/ai-outfitter/outfitter/blob/main/docs/runbooks/share-one-catalog.md),
+[run it without your laptop](https://github.com/ai-outfitter/outfitter/blob/main/docs/runbooks/run-without-your-laptop.md),
+then [give the agent a residence](https://github.com/ai-outfitter/outfitter/blob/main/docs/runbooks/give-the-agent-a-residence.md).
+Each ends with the one concrete step that starts the next.
 
 ## The repositories
 
