@@ -33,6 +33,9 @@ success check you run rather than judge.
    There is nothing to govern yet — but the habit that matters starts here:
    document what works and what doesn't in `AGENTS.md`/`CLAUDE.md`, and
    keep it in the repo.
+   - [First-time CLI agent users](https://github.com/ai-outfitter/outfitter/blob/main/docs/documentation/first-time-cli-agent-users.md#context-engineering)
+     — what belongs in a first `AGENTS.md`, and how to ask an agent to use
+     it.
 
 2. **Delegated** — a local agent does the task; you define the idea and
    review the PR. *You are here if* engineers run a coding agent in a
@@ -68,7 +71,8 @@ success check you run rather than judge.
 
 4. **Governed** — the organization shares one version-pinned catalog of
    agents, skills, and policy; every agent action lands in an auditable
-   record; **resident agents** — long-lived agents onboarded like teammates,
+   record; **[resident agents](https://github.com/ai-outfitter/outfitter/blob/main/docs/documentation/in-cluster.md)**
+   — long-lived agents onboarded like teammates,
    with their own accounts and boundaries — take on standing jobs. *You are
    here when* agents work across many teams, and the organization needs
    shared policy — and proof of what every agent did.
@@ -132,7 +136,8 @@ reproduces and prioritizes each report, and only the ones that clear triage
 enter the pipeline.
 
 Composition is also the adoption motion: an engineer refines a skill in
-their own `~/.agents` against real work; the team mines
+their own [`~/.agents`](https://github.com/ai-outfitter/outfitter/blob/main/docs/documentation/local-development.md)
+against real work; the team mines
 [pensieve](https://github.com/ai-outfitter/pensieve) for the patterns behind
 successful and failing runs. When a change earns trust it moves by pull
 request into the org catalog, where every agent composes it by name. One
@@ -225,8 +230,9 @@ is an open standard for doing the same for agents:
 
 Markdown and JSON. Readable in a sitting, reviewable in a pull request,
 diffable in an audit. Layers merge by name — a project's `.agents/` over an
-engineer's `~/.agents/` over the organization's **catalog**, a shared
-collection pinned by version — so individuals keep their preferences and
+engineer's `~/.agents/` over the organization's
+**[catalog](https://github.com/ai-outfitter/outfitter/blob/main/docs/documentation/catalogs.md)**,
+a shared collection pinned by version — so individuals keep their preferences and
 organizations keep their policy
 ([conventions](https://github.com/ai-outfitter/outfitter/blob/main/docs/documentation/conventions.md)).
 
