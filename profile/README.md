@@ -8,9 +8,8 @@ Everything here builds on one convention: an agent's context, tools, skills,
 and permissions are plain files in a `.agents/` directory — committed,
 reviewed, and shared like the rest of your code. The same definition runs
 across environments (on a laptop, headless in CI, or as a resident agent in
-a cluster) and with any model vendor, including self-hosted models. The
-core is open source under MIT — free to adopt, free to fork, free to build
-a business on.
+a cluster) and with any model vendor, including self-hosted models. The core
+is open source under MIT.
 
 Two rules govern the whole climb:
 
@@ -20,17 +19,6 @@ Two rules govern the whole climb:
 Follow them and adopting agents stops being a leap of faith. You never skip
 a step you don't understand, and nothing you build on one rung is thrown
 away on the next.
-
-Terms:
-
-- **harness** — the CLI tool that runs an agent: Claude Code, Pi, Codex.
-- **forge** — where code and issues live: GitHub, GitLab.
-- **profile** — one agent's full definition (context, tools, skills,
-  permissions) as plain files.
-- **catalog** — a shared, version-pinned collection of profiles and skills.
-- **the record** — the accumulated, write-once evidence of what agents
-  actually did: transcripts, tool calls, diffs, approvals — captured per
-  action, stored in [pensieve](https://github.com/ai-outfitter/pensieve).
 
 ## Why we built AI Outfitter
 
@@ -50,6 +38,53 @@ rung is hard to see from where you stand.
 
 We built AI Outfitter to help you climb the ramp faster.
 
+## Why plain files
+
+Your agent setup is already configuration: system prompts, skills, MCP
+servers, model choices, permissions. Today that configuration lives per tool
+and per laptop, gets pasted between repositories, and drifts. Every other
+kind of configuration your organization depends on graduated from that stage
+years ago — into files, in a repository, behind review.
+
+The [`.agents` convention](https://github.com/ai-outfitter/outfitter/blob/main/docs/documentation/concepts.md#the-agents-protocol)
+is an open standard for doing the same for agents:
+
+```text
+.agents/
+  agents.md            # shared operating context
+  system-prompt.md     # base system prompt
+  mcp.json             # MCP servers
+  models.json          # model configuration
+  agents/<id>/agent.md # agent identities + loadouts
+  skills/<id>/...      # capability packages
+  knowledge/           # reference documents
+  commands/            # slash commands
+```
+
+Markdown and JSON. Readable in a sitting, reviewable in a pull request,
+diffable in an audit. Layers merge by name — a project's `.agents/` over an
+engineer's `~/.agents/` over the organization's **catalog**, a shared
+collection pinned by version — so individuals keep their preferences and
+organizations keep their policy
+([conventions](https://github.com/ai-outfitter/outfitter/blob/main/docs/documentation/conventions.md)).
+
+Composition beats accumulation. A **profile** is one agent's full
+definition, a selection from those files, and profiles stack: a personal
+baseline, a team convention, a project role, switched as the work changes.
+That keeps each profile tight, and tight profiles preserve the context
+headroom that turns into faster, better sessions.
+
+It is also the exit door. The directory is the source of truth and is useful
+without Outfitter. Vendor-neutral cuts in every direction — models,
+**harnesses** (the CLI that runs an agent: Claude Code, Pi, Codex), and us.
+Swap model vendors freely. Run the catalog through any harness: Pi has the
+deepest runtime support today, with Claude Code tracked component by
+component in the
+[support matrix](https://github.com/ai-outfitter/outfitter/blob/main/docs/documentation/support-matrix.md)
+— a Claude Code team starts on Claude Code, and the matrix shows the gaps
+before you hit them. And if you drop Outfitter itself, the catalog you
+built is still yours — plain files, still working.
+
 ## The ramp
 
 Five rungs, from AI-assisted coding to an autonomous lifecycle
@@ -67,10 +102,9 @@ got you here — and without adopting complexity too early.
    review the PR. *You are here if* engineers run a coding agent in a
    terminal and push the result. This is where configuration starts to
    matter: [outfitter](https://github.com/ai-outfitter/outfitter) composes
-   what an agent knows and may do — its context, tools, skills, and
-   permissions — into a **profile**: plain files in your `.agents/` folder,
-   reviewed like code and portable across environments and harnesses.
-   [deepwork](https://github.com/ai-outfitter/deepwork) adds
+   what an agent knows and may do into a profile — plain files in your
+   `.agents/` folder, reviewed like code and portable across environments
+   and harnesses. [deepwork](https://github.com/ai-outfitter/deepwork) adds
    step-by-step quality gates so the agent checks its own work.
 
 3. **Automated** — a workflow runs without your laptop: an issue, a message,
@@ -113,11 +147,11 @@ got you here — and without adopting complexity too early.
    portable skills against real outcomes. Rung 5 is where the stack is
    thinnest today.
 
-## Start with one workflow, end to end
+## One workflow, end to end
 
-The right first goal for most organizations is one workflow automated end to
-end: **a feature idea becomes a merged PR**, and every step leaves evidence.
-This is what rung 3 looks like up close.
+Start with one workflow automated end to end: **a feature idea becomes a
+merged PR**, and every step leaves evidence. This is what rung 3 looks like
+up close.
 
 ![A feature idea flows through plan, implement, and adversarial review to a merged PR, with every transition writing to the evidence record](./assets/feature-to-pr.svg)
 
@@ -139,62 +173,21 @@ This is what rung 3 looks like up close.
    tool calls, and diffs captured as artifacts before the environment that
    produced them is torn down.
 
-The same shape handles other starting workflows. A vulnerability
-report instead of a feature idea turns the pipeline into governed security
+The same shape handles other starting workflows. A vulnerability report
+instead of a feature idea turns the pipeline into governed security
 remediation: the scanner files the issue (most scanners already can), the
 planner scopes the fix, and the same steps carry it to a tested, approved
 PR. Bug reports run the same way with a triage step in front: an agent
 reproduces and prioritizes each report, and only the ones that clear triage
 enter the pipeline.
 
-Every step is an agent profile from a shared catalog — plain files, pinned
-by commit, reviewed by pull request, the same files at a desk or in CI.
-That composition is also the adoption motion: an engineer refines a skill
-in their own `~/.agents` against real work; the team mines
-[pensieve](https://github.com/ai-outfitter/pensieve) for the patterns
-behind successful and failing runs. When a change earns trust it moves by
-pull request into the org catalog, where every agent composes it by name.
-One person's improvement becomes everyone's default at the next pin bump —
-no one else reconfigures anything.
-
-## Why plain files
-
-Your agent setup is already configuration: system prompts, skills, MCP
-servers, model choices, permissions. Today that configuration lives per tool
-and per laptop, gets pasted between repositories, and drifts. Every other
-kind of configuration your organization depends on graduated from that stage
-years ago — into files, in a repository, behind review.
-
-The [`.agents` convention](https://github.com/ai-outfitter/outfitter/blob/main/docs/documentation/concepts.md#the-agents-protocol)
-is an open standard for doing the same for agents:
-
-```text
-.agents/
-  agents.md            # shared operating context
-  system-prompt.md     # base system prompt
-  mcp.json             # MCP servers
-  models.json          # model configuration
-  agents/<id>/agent.md # agent identities + loadouts
-  skills/<id>/...      # capability packages
-  knowledge/           # reference documents
-  commands/            # slash commands
-```
-
-Markdown and JSON. Readable in a sitting, reviewable in a pull request,
-diffable in an audit. Layers merge by name — a project's `.agents/` over an
-engineer's `~/.agents/` over the organization's pinned catalog — so
-individuals keep their preferences and organizations keep their policy
-([conventions](https://github.com/ai-outfitter/outfitter/blob/main/docs/documentation/conventions.md)).
-
-It is also the exit door. The directory is the source of truth and is useful
-without Outfitter. Vendor-neutral cuts in every direction — models,
-harnesses, and us. Swap model vendors freely. Run the catalog through any
-harness: Pi has the deepest runtime support today, with Claude Code tracked
-component by component in the
-[support matrix](https://github.com/ai-outfitter/outfitter/blob/main/docs/documentation/support-matrix.md)
-— a Claude Code team starts on Claude Code, and the matrix shows the gaps
-before you hit them. And if you drop Outfitter itself, the catalog you
-built is still yours — plain files, still working.
+Composition is also the adoption motion: an engineer refines a skill in
+their own `~/.agents` against real work; the team mines
+[pensieve](https://github.com/ai-outfitter/pensieve) for the patterns behind
+successful and failing runs. When a change earns trust it moves by pull
+request into the org catalog, where every agent composes it by name. One
+person's improvement becomes everyone's default at the next pin bump — no
+one else reconfigures anything.
 
 ## Start this afternoon
 
@@ -234,40 +227,22 @@ cover the path.
 
 ## The repositories
 
-Start with **[outfitter](https://github.com/ai-outfitter/outfitter)** — the
-toolchain for `.agents`: compose an agent's context, tools, skills, and
-permissions as a reviewable profile, then run the same profile locally, in
-GitHub Actions, or in Kubernetes.
+Everything composes with **[outfitter](https://github.com/ai-outfitter/outfitter)**,
+the toolchain for `.agents`. The rung column maps each repo to the ramp
+above.
 
-- **[actions](https://github.com/ai-outfitter/actions)** *(rung 3)* — run
-  any profile headless in CI: scheduled or event-driven reviewers,
-  implementers, and auditors.
-- **[channels](https://github.com/ai-outfitter/channels)** *(rungs 3–4)* —
-  push email, Slack, Signal, and forge events into an agent session; wake
-  only on real work.
-- **[agent-operator](https://github.com/ai-outfitter/agent-operator)**
-  *(rung 4, in active build)* — Kubernetes `Organization` and `Agent`
-  resources for resident agents in your cluster; running internally today.
-- **[pensieve](https://github.com/ai-outfitter/pensieve)** *(rung 4, in
-  active build)* — the write-once evidence store: per-harness collectors, an
-  S3 Object Lock backend, and a verifier. The specification leads the code
-  by design — capture the bytes first, build views second — and collectors
-  are already landing against it.
-- **[deepwork](https://github.com/ai-outfitter/deepwork)** *(rungs 2–3)* —
-  structured multi-step jobs with typed arguments and quality gates. Runs on
-  Pi, Claude Code, and Codex.
-- **[evals](https://github.com/ai-outfitter/evals)** *(rung 5, new)* —
-  reproducible, attested benchmarks for agent profiles and harnesses.
-- **[autoimprove](https://github.com/ai-outfitter/autoimprove)** *(rung 5)*
-  — recursive skill improvement: train portable markdown skills against
-  real outcomes.
-- **[community-profiles](https://github.com/ai-outfitter/community-profiles)**
-  / **[default-profiles](https://github.com/ai-outfitter/default-profiles)**
-  — shared catalogs of agents and skills, pinned by release, composed by
-  name.
-- **[.agents](https://github.com/ai-outfitter/.agents)** — this
-  organization's own catalog; it holds our baseline SDLC report — the
-  runbook's first step, run on ourselves.
+| Repo | Rung | What it is |
+| --- | --- | --- |
+| **[outfitter](https://github.com/ai-outfitter/outfitter)** | 2 | Compose a profile, then run that same profile locally, in GitHub Actions, or in Kubernetes. |
+| **[deepwork](https://github.com/ai-outfitter/deepwork)** | 2–3 | Structured multi-step jobs with typed arguments and quality gates. Runs on Pi, Claude Code, and Codex. |
+| **[actions](https://github.com/ai-outfitter/actions)** | 3 | Any profile, headless in CI: scheduled or event-driven reviewers, implementers, and auditors. |
+| **[channels](https://github.com/ai-outfitter/channels)** | 3–4 | Push email, Slack, Signal, and forge events into an agent session; wake only on real work. |
+| **[agent-operator](https://github.com/ai-outfitter/agent-operator)** | 4 | Kubernetes `Organization` and `Agent` resources for resident agents in your cluster. *In active build; running internally today.* |
+| **[pensieve](https://github.com/ai-outfitter/pensieve)** | 4 | The write-once evidence store: per-harness collectors, an S3 Object Lock backend, and a verifier. *In active build; the specification leads the code by design.* |
+| **[evals](https://github.com/ai-outfitter/evals)** | 5 | Reproducible, attested benchmarks for agent profiles and harnesses. *New.* |
+| **[autoimprove](https://github.com/ai-outfitter/autoimprove)** | 5 | Recursive skill improvement: train portable markdown skills against real outcomes. |
+| **[default-profiles](https://github.com/ai-outfitter/default-profiles)** / **[community-profiles](https://github.com/ai-outfitter/community-profiles)** | any | Shared catalogs of agents and skills, pinned by release, composed by name. |
+| **[.agents](https://github.com/ai-outfitter/.agents)** | any | This organization's own catalog, holding the baseline SDLC report we ran on ourselves. |
 
 Pi extension packages:
 [ulta-tasklist](https://github.com/ai-outfitter/ulta-tasklist),
@@ -280,30 +255,11 @@ This stack is built with the leverage it sells, and it shows in the commit
 dates: v1.5.0 followed v1.4.0 by three days, and the evidence store went
 from an empty repository to a public specification to its first working
 collectors in under 48 hours. Actions and the catalogs carry this org's own
-real workloads. Read the rung and status tags above against that tempo —
+real workloads. Read the rung and status columns above against that tempo —
 the unit is days to weeks, not quarters.
 
 The model is open core: the convention, the toolchain, and the defaults are
 MIT — modules you can rip out and replace — while some advanced capabilities
 ship under an enterprise license. If you are evaluating this for an
-organization, start with the
-[org-onboarding runbook](https://github.com/ai-outfitter/outfitter/blob/main/docs/documentation/usecases/org-onboarding-sdlc-report.md),
-then [open an issue](https://github.com/ai-outfitter/outfitter/issues) with
-what you found. The gaps you hit are the roadmap we want.
-
-## Philosophy
-
-The full argument lives in
-[docs/philosophy.md](https://github.com/ai-outfitter/outfitter/blob/main/docs/philosophy.md);
-the short version:
-
-- **Trust through evidence.** An agent is trusted the way a new teammate is:
-  bounded scopes, adversarial review as a pipeline step, every transition on
-  the record.
-- **Own your session data.** The record that satisfies an auditor also feeds
-  your evals, policy tuning, and training — losing it discards the asset
-  that makes the system improvable.
-- **Expeditious agents.** Tight, purpose-built profiles preserve the context
-  headroom that turns into better decisions and faster sessions.
-- **Composition over accumulation.** Stack a personal baseline, a team
-  convention, and a project role; switch as the work changes.
+organization, [open an issue](https://github.com/ai-outfitter/outfitter/issues)
+with what you found. The gaps you hit are the roadmap we want.
